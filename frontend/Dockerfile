@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Expose port used by React dev server
-EXPOSE 3000
+EXPOSE 5173
 
 # Start React dev server
 CMD ["npm", "run", "dev"]
