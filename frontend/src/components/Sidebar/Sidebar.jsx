@@ -144,6 +144,7 @@ function SidebarItem({ handleMobileSidebar, iconFill, iconOutline, label, path, 
       const { handleSetHeader } = usePageHeader();
       const { data: notificationData } = useNotification();
       const notifData = notificationData?.data || [];
+      console.log(theme.base);
       
       const handleMobileClick = () => {
             handleSetHeader(label);
@@ -220,8 +221,9 @@ function SidebarItem({ handleMobileSidebar, iconFill, iconOutline, label, path, 
 
                   {/* Tooltip when collapsed */}
                   {isCollapsed && (
-                        <span className={`absolute z-50 left-full top-1/2 -translate-y-1/2 ml-2 px-3 py-2 bg-linear-to-r ${theme.base}  text-white dark:bg-stone-700 text-sm rounded-4xl opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-all duration-200`}>
+                        <span className={`absolute z-100 left-full top-1/2 -translate-y-1/2 ml-2 px-3 py-2 bg-linear-to-r ${theme.base}  text-white dark:bg-stone-700 text-sm rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-all duration-200`}>
                               {label}
+                              <span className={`absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-linear-to-r ${theme.base}  rotate-45`}/>
                         </span>
                   )}
             </div>
