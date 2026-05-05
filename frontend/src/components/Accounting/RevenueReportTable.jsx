@@ -1,13 +1,13 @@
 import LoadingSpinner from "../../shared/LoadingSpinner";
 
-export default function BookingReportTable({ revenueData, isLoading }){
+export default function BookingReportTable({ revenueData, isLoading=false }){
       return (
             <>
                   {/* ===== DESKTOP VIEW (Table) ===== */}   
-                  <div className="hidden md:flex overflow-y-auto h-[calc(90vh-260px)] scrollbar-hide">
+                  <div className="hidden md:flex  overflow-y-auto h-[calc(90vh-260px)] scrollbar-hide">
                         <table className="min-w-full table-fixed text-sm text-center">
                               <thead className="sticky top-0 bg-stone-800 dark:bg-stone-700 text-white z-10 whitespace-nowrap">
-                                    <tr>
+                                    <tr className="h-12">
                                           <th className="px-6 py-3 text-center font-medium uppercase tracking-wider">Month</th>
                                           <th className="px-6 py-3 text-center font-medium uppercase tracking-wider ">Direct Payments</th>
                                           <th className="px-6 py-3 text-center font-medium uppercase tracking-wider ">Zuzu Payments</th>
@@ -16,18 +16,49 @@ export default function BookingReportTable({ revenueData, isLoading }){
                               </thead>
 
                               <tbody className="bg-white dark:bg-stone-900">
-                                    {isLoading ? 
-                                          <LoadingSpinner/>
-                                    :
-                                          revenueData.map(data => (
-                                                <tr key={data.month_name} className="bg-stone-50 dark:bg-stone-900 dark:hover:bg-stone-800 hover:bg-stone-100 border-b border-stone-200 dark:border-stone-700 text-xs md:text-[17px] whitespace-nowrap text-stone-800 dark:text-white">
+                                    {isLoading ? (
+                                          <tr>
+                                                <td colSpan={4} className="p-4 text-center">
+                                                      <LoadingSpinner />
+                                                </td>
+                                          </tr>
+                                    ) : revenueData.length > 0 ? (
+                                          revenueData.map((data) => (
+                                                <tr
+                                                      key={data.month_name}
+                                                      className="bg-stone-50 dark:bg-stone-900 dark:hover:bg-stone-800 hover:bg-stone-100 border-b border-stone-200 dark:border-stone-700 text-xs md:text-[17px] whitespace-nowrap text-stone-800 dark:text-white"
+                                                >
                                                       <td className="p-3">{data.month_name}</td>
-                                                      <td className="p-3">{new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(data.direct)}</td>
-                                                      <td className="p-3">{new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(data.online)}</td>
-                                                      <td className="p-3">{new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(data.total)}</td>
+                                                      <td className="p-3">
+                                                      {new Intl.NumberFormat("en-PH", {
+                                                            style: "currency",
+                                                            currency: "PHP",
+                                                      }).format(data.direct)}
+                                                      </td>
+                                                      <td className="p-3">
+                                                      {new Intl.NumberFormat("en-PH", {
+                                                            style: "currency",
+                                                            currency: "PHP",
+                                                      }).format(data.online)}
+                                                      </td>
+                                                      <td className="p-3">
+                                                      {new Intl.NumberFormat("en-PH", {
+                                                            style: "currency",
+                                                            currency: "PHP",
+                                                      }).format(data.total)}
+                                                      </td>
                                                 </tr>
                                           ))
-                                    }
+                                    ) : (
+                                          <tr>
+                                                <td
+                                                colSpan={4}
+                                                className="p-4 text-center text-stone-500 dark:text-stone-400"
+                                                >
+                                                No revenue data available
+                                                </td>
+                                          </tr>
+                                    )}
                               </tbody>
 
                         </table>

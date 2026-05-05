@@ -4,11 +4,13 @@ import { Chart, BarController, BarElement, CategoryScale, LinearScale, LineContr
 import { useDarkMode } from "../../context/DarkModeContext";
 const BigCard = lazy(() => import("../../shared/BigCard"));
 import { useBookingStats, useBookingTrend } from "../../hooks/dashboardQueries";
+import { useTheme } from "../../context/ThemeContext";
 
 Chart.register( BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend, LineController, LineElement, PointElement, ArcElement, PieController );
 
 export default function Charts(){
       const { currentMode } = useDarkMode();
+      const { theme } = useTheme();
 
       const { data: bookingTrendData, isLoading: monthlyTrendLoading } = useBookingTrend();
       const { data: bookingStatsData, isLoading: bookingDistributionLoading } = useBookingStats();
@@ -76,21 +78,21 @@ export default function Charts(){
       return (
             <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-3  pb-1 md:border-b border-stone-200  dark:border-stone-700">
-                        <TrendingUpDownIcon className="w-4 h-4 md:w-6 md:h-6 text-green-500 dark:text-green-400"/>
+                        <TrendingUpDownIcon className={`w-4 h-4 md:w-6 md:h-6 ${theme.baseText}`}/>
                         <h2 className="text-sm md:text-lg font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">Summary Charts</h2>
                   </div>
 
                   <Suspense fallback={null}>
                         <div className="grid md:grid-cols-20 grid-cols-1 gap-4">
                               {/* Monthly Bookings */}
-                              <BigCard title="Monthly Bookings" icon={<BarChart3 className="w-5 h-5 text-blue-500" />} label="(This Year)" colSpan="md:col-span-13">
+                              <BigCard title="Monthly Bookings" icon={<BarChart3 className={`w-5 h-5 ${theme.baseText}`} />} label="(This Year)" colSpan="md:col-span-13">
                                     <div className="relative h-[40vh] md:h-[46vh] mt-4 bg-stone-50 dark:bg-stone-800 p-2 rounded-xl">
                                           <canvas ref={monthlyCanvas} />
                                     </div>
                               </BigCard>
 
                               {/* Top % Most Booked Area */}
-                              <BigCard title={'Top 5 Most Booked Area'} icon={ <TrendingUp className="w-5 -h-5 text-green-500"/> } label={'(Historical)'} colSpan={'md:col-span-7'}>
+                              <BigCard title={'Top 5 Most Booked Area'} icon={ <TrendingUp className={`w-5 h-5 ${theme.baseText}`}/> } label={'(Historical)'} colSpan={'md:col-span-7'}>
                                     <div className="mt-8 space-y-4 ">
                                           {topBookedArea && topBookedArea.map((area, index) => (
                                                 <div key={index}>
@@ -103,14 +105,14 @@ export default function Charts(){
 
                         <div className="grid md:grid-cols-20 gap-4">
                               {/* Booking Type Distribution */}
-                              <BigCard title={'Booking Type Distribution'} icon={  <Clock10Icon className="w-5 -h-5 text-yellow-500"/> } label={'(Historical)'} colSpan={'md:col-span-7'}>
+                              <BigCard title={'Booking Type Distribution'} icon={  <Clock10Icon className={`w-5 h-5 ${theme.baseText}`}/> } label={'(Historical)'} colSpan={'md:col-span-7'}>
                                     <div className="relative h-[40vh] md:h-[46vh] mt-4 flex justify-center">
                                           <canvas ref={chartCanvasRef} />
                                     </div>
                               </BigCard>
 
                               {/* Guest Trend */}
-                              <BigCard title={'Guest & Revenue Trend'} icon={  <CalendarArrowUpIcon className="w-5 -h-5 text-blue-500"/> } label={'(This Week)'} colSpan={'md:col-span-13'}>
+                              <BigCard title={'Guest & Revenue Trend'} icon={  <CalendarArrowUpIcon className={`w-5 h-5 ${theme.baseText}`}/> } label={'(This Week)'} colSpan={'md:col-span-13'}>
                                     <div className="relative h-[40vh] md:h-[46vh] mt-4 bg-stone-50 dark:bg-stone-800 p-2 rounded-xl">
                                           <canvas ref={weeklyCanvas} />
                                     </div>

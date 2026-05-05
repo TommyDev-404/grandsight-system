@@ -45,6 +45,7 @@ export default function RatesAndAvailability(){
 
       // Combine all loading states into a single pageLoading variable
       const pageLoading = ratesAvailabilityMetricLoading || areaInfoLoading;
+      
       if(pageLoading) return <LoadingSpinner/>;
 
       return (

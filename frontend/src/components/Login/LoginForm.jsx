@@ -52,16 +52,16 @@ export default function LoginForm() {
                   {/* Form */}
                   <form onSubmit={handleLogin} className="space-y-4 flex-1">
 
-                        <input type="text" placeholder="Username" value={username} required onChange={(e) => setUsername(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                        <input type="text" placeholder="Username" value={username} required onChange={(e) => setUsername(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"/>
 
                         <div className="relative">
-                              <input type={showPassword ? "text" : "password"} placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-                              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500">{showPassword ? <BsEyeSlashFill className="w-4 h-4 md:w-5 md:h-5"/> : <BsEyeFill className="w-4 h-4 md:w-5 md:h-5"/>}</button>
+                              <input type={showPassword ? "text" : "password"} placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"/>
+                              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-white">{showPassword ? <BsEyeSlashFill className="w-4 h-4 md:w-5 md:h-5"/> : <BsEyeFill className="w-4 h-4 md:w-5 md:h-5"/>}</button>
                         </div>
 
                         {/* Forgot password */}
                         <div className="text-right">
-                              <button type="button" onClick={() => switchView("forgot")} className="text-[12px] md:text-xs text-blue-600 hover:underline">Forgot password?</button>
+                              <button type="button" onClick={() => switchView("forgot")} className="text-[12px] md:text-xs text-stone-200 hover:underline">Forgot password?</button>
                         </div>
 
                         {/* Button */}

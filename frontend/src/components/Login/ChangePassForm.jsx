@@ -38,12 +38,9 @@ export default function ChangePassForm() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="w-full rounded-lg border border-stone-300 md:p-4 p-3 text-xs md:text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full rounded-lg border border-stone-300 md:p-4 p-3 text-xs md:text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                               />
 
-                              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500">
-                                    {showPassword ? <BsEyeSlashFill className="w-4 h-4 md:w-5 md:h-5"/> : <BsEyeFill className="w-4 h-4 md:w-5 md:h-5"/>}
-                              </button>
                         </div>
 
                         {/* Confirm password */}
@@ -53,8 +50,13 @@ export default function ChangePassForm() {
                               value={confirm}
                               onChange={(e) => setConfirm(e.target.value)}
                               required
-                              className="w-full rounded-lg border border-stone-300 md:p-4 p-3 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              className="w-full rounded-lg border border-stone-300 md:p-4 p-3 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                         />
+
+                        <div className="-mt-2 mb-8">
+                              <input type="checkbox" id="showPassword" checked={showPassword} onChange={() => setShowPassword(!showPassword)} className="mr-2"/>
+                              <label htmlFor="showPassword" className="text-stone-200 text-xs md:text-sm">Show password</label>
+                        </div>
 
                         <button type="submit" disabled={isPending}  className={`w-full ${isPending ? 'bg-blue-800' : 'bg-blue-600 hover:bg-blue-500'} text-white rounded-lg p-2.5 md:py-3 text-xs md:text-sm transition flex justify-center gap-1 items-center`}>
                               { isPending ?
@@ -71,14 +73,11 @@ export default function ChangePassForm() {
 
                         {/* Footer */}
                         <div className="mt-6 text-center text-sm">
-                              <span className="text-stone-600 text-xs md:text-sm">Remember password?</span>{" "}
-                              <button
-                                    onClick={() => switchView("login")}
-                                    className="text-blue-600 hover:underline text-xs md:text-sm"
-                              >
+                              <span className="text-stone-200 text-xs md:text-sm">Remember password?</span>{" "}
+                              <button onClick={() => switchView("login")} className="text-white underline  text-xs md:text-sm">
                                     Sign in
                               </button>
-                  </div>
+                        </div>
 
             </Modal>
       );

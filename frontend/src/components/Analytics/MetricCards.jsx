@@ -11,6 +11,7 @@ import {
       CalendarCogIcon,
       TargetIcon,
 } from "lucide-react";
+import { useTheme } from "../../context/ThemeContext";
 
 const Card = lazy(() => import("../../shared/Cards"));
 
@@ -27,11 +28,12 @@ const formatPercent = (value) => {
       return `${Number(value)}%`;
 };
 
-function MetricCard({ title, icon, iconBg, current, change, suffix = "", compareText, isLoading }) {
+function MetricCard({ title, icon, current, change, suffix = "", compareText, isLoading }) {
+      const { theme } = useTheme();
       const isPositive = Number(change ?? 0) > 0;
 
       return (
-            <Card title={title} icon={icon} iconBg={iconBg}>
+            <Card title={title} icon={icon} iconBg={`${theme.color}`}>
                   {/* Main Value */}
                   <p className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mt-2">
                         {isLoading ? (
@@ -80,8 +82,7 @@ export default function AnalyticsMetricCards({ area }) {
                   <div className="grid md:grid-cols-4 grid-1 gap-3">
                         <MetricCard
                               title="Daily Occupancy"
-                              icon={ <Building2Icon className="w-3 h-3 md:w-4 md:h-4 text-purple-500 dark:text-white" />}
-                              iconBg="bg-purple-100 dark:bg-purple-500"
+                              icon={ <Building2Icon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
                               current={formatPercent(metricData?.occupancy?.current)}
                               change={metricData?.occupancy?.change}
                               compareText="vs Yesterday"
@@ -90,8 +91,7 @@ export default function AnalyticsMetricCards({ area }) {
 
                         <MetricCard
                               title="Today`s Revenue"
-                              icon={<CalendarArrowUpIcon className="w-3 h-3 md:w-4 md:h-4 text-green-500 dark:text-white" />}
-                              iconBg="bg-green-100 dark:bg-green-500"
+                              icon={<CalendarArrowUpIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
                               current={formatCurrency(metricData?.daily_revenue?.current)}
                               change={metricData?.daily_revenue?.change}
                               compareText="vs Yesterday"
@@ -100,8 +100,7 @@ export default function AnalyticsMetricCards({ area }) {
 
                         <MetricCard
                               title="Monthly Revenue"
-                              icon={<CalendarCogIcon className="w-3 h-3 md:w-4 md:h-4 text-blue-500 dark:text-white" />}
-                              iconBg="bg-blue-100 dark:bg-blue-500"
+                              icon={<CalendarCogIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
                               current={formatCurrency(metricData?.monthly_revenue?.current)}
                               change={metricData?.monthly_revenue?.change}
                               compareText="vs Target"
@@ -110,7 +109,7 @@ export default function AnalyticsMetricCards({ area }) {
 
                         <Card
                               title="Target Revenue"
-                              icon={<TargetIcon className="w-3 h-3 md:w-4 md:h-4 text-red-500 dark:text-white" />}
+                              icon={<TargetIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
                               iconBg="bg-red-100 dark:bg-red-500"
                         >
                               <p className="text-2xl  md:text-3xl font-bold text-gray-800 dark:text-white mb-5">

@@ -30,7 +30,7 @@ export default function ForgotForm() {
                   {/* EMAIL STEP */}
                   {step === "email" && (
                         <div className="space-y-4">
-                              <input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                              <input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"/>
                               <button onClick={handleSendEmail} disabled={verifyEmailLoading} className={`w-full ${verifyCodeLoading ? 'bg-blue-900' : 'bg-blue-600 hover:bg-blue-500'} text-white rounded-lg p-2.5 md:py-3 text-xs md:text-sm transition flex justify-center gap-1 items-center`}>
                                     {verifyEmailLoading ? 
                                           <>
@@ -46,7 +46,7 @@ export default function ForgotForm() {
                   {step === "code" && (
                   <div className="space-y-4">
 
-                        <input type="text" placeholder="Enter 6-digit code" value={code} onChange={(e) => setCode(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                        <input type="text" placeholder="Enter 6-digit code" value={code} onChange={(e) => setCode(e.target.value)} className="w-full rounded-lg border border-stone-300 p-3 md:p-4 text-xs md:text-sm tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"/>
 
                         <button onClick={handleVerifyCode} disabled={verifyCodeLoading} className={`w-full ${verifyCodeLoading ? 'bg-blue-900' : 'bg-blue-600 hover:bg-blue-500'} text-white rounded-lg p-2.5 md:py-3 text-xs md:text-sm flex items-center justify-center gap-2 transition`}>
                               {verifyCodeLoading ? 
@@ -66,8 +66,8 @@ export default function ForgotForm() {
 
                   {/* Footer */}
                   <div className="mt-6 text-center text-sm">
-                        <span className="text-stone-600 text-xs md:text-sm">Remember password?</span>{" "}
-                        <button onClick={() => switchView("login")} className="text-blue-600 hover:underline  text-xs md:text-sm">
+                        <span className="text-stone-200 text-xs md:text-sm">Remember password?</span>{" "}
+                        <button onClick={() => switchView("login")} className="text-white underline  text-xs md:text-sm">
                               Sign in
                         </button>
                   </div>

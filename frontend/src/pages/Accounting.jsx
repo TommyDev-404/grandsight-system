@@ -46,9 +46,9 @@ export default function Accounting(){
 		<section className="fade-in h-auto overflow-y-auto md:overflow-visible">
                   {/* Summary  Cards */}	
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
-                        <SideIconCards title={'Direct Payment (Today)'} icon={<CreditCardIcon className="w-5 h-5 text-blue-500 dark:text-white"/>} bgColor={'bg-blue-100 dark:bg-blue-500'} data={new Intl.NumberFormat("en-PH", { style: 'currency', currency: "PHP" }).format(accountingMetric?.direct)}/>
-                        <SideIconCards title={'ZUZU Payment (Today)'} icon={<Globe2Icon className="w-5 h-5 text-yellow-500 dark:text-white"/>} bgColor={'bg-yellow-100 dark:bg-yellow-500'} data={new Intl.NumberFormat("en-PH", { style: 'currency', currency: "PHP" }).format(accountingMetric?.online)}/>
-                        <SideIconCards title={'Total Revenue'} icon={<DollarSignIcon className="w-5 h-5 text-green-500 dark:text-white"/>} bgColor={'bg-green-100 dark:bg-green-500'} data={new Intl.NumberFormat("en-PH", { style: 'currency', currency: "PHP" }).format(accountingMetric?.total_revenue)}/>
+                        <SideIconCards title={'Direct Payment (Today)'} icon={<CreditCardIcon className="w-5 h-5 text-white"/>} data={new Intl.NumberFormat("en-PH", { style: 'currency', currency: "PHP" }).format(accountingMetric?.direct ?? 0)}/>
+                        <SideIconCards title={'ZUZU Payment (Today)'} icon={<Globe2Icon className="w-5 h-5 text-white"/>} data={new Intl.NumberFormat("en-PH", { style: 'currency', currency: "PHP" }).format(accountingMetric?.online ?? 0)}/>
+                        <SideIconCards title={'Total Revenue'} icon={<DollarSignIcon className="w-5 h-5 text-white"/>} data={new Intl.NumberFormat("en-PH", { style: 'currency', currency: "PHP" }).format(accountingMetric?.total_revenue ?? 0)}/>
                   </div>
                   
                   {/* Booking Revenue Report Table */}	

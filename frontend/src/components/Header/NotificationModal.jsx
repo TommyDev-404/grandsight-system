@@ -42,7 +42,7 @@ export default function NotificationsModal({ isOpen, setNotifOpen}) {
       
       return (
             <div className={`inset-0 z-10 ${isOpen ? 'fixed bg-black/20 backdrop-blur-[2px] pointer-events-auto ' : 'hidden' } md:bg-transparent md:backdrop-blur-none`}>
-                  <div ref={modalRef}  className={`absolute top-1/2 left-1/2  -translate-y-1/2 -translate-x-1/2  md:top-53 md:right-4 md:left-auto  md:-translate-x-10  w-[90%] overflow-y-auto md:w-80 rounded-xl bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 shadow-lg overflow-hidden  transition-all duration-300 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}>
+                  <div ref={modalRef}  className={`absolute top-1/2 left-1/2  -translate-y-1/2 -translate-x-1/2  md:top-53 md:right-4 md:left-auto  md:-translate-x-10  w-[90%] overflow-y-auto md:w-80 rounded-xl bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 shadow-lg overflow-hidden  transition-all duration-300 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none z-50"}`}>
                         {/* Header */}
                         <div className={`flex items-center md:justify-center gap-2 px-4 py-3 border-b border-stone-200 dark:border-stone-700  bg-linear-to-r ${theme.base}`}>
                               <Bell className="w-5 h-5 text-white" />

@@ -31,6 +31,7 @@ import Filter from "../components/Analytics/Filter";
 import LoadingSpinner from '../shared/LoadingSpinner';
 import useDesktop from "../hooks/useDesktop";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTheme } from "../context/ThemeContext";
 
 const StatsCharts = lazy(() => import("../components/Analytics/StatsChart"));
 const BigCard = lazy(() => import("../shared/BigCard"));
@@ -52,6 +53,7 @@ Chart.register(
 );
 
 export default function Analytics(){
+      const { theme } = useTheme();
       const isDesktop  = useDesktop();
       const { currentMode } = useDarkMode();
       const isDark = currentMode === 'dark' ? true : false;
@@ -172,7 +174,7 @@ export default function Analytics(){
                                           
                                           {/* Revenue and Checkin Forecast Chart*/}
                                           <div className="grid grid-cols-2 gap-5">
-                                                <BigCard  title={'Checkin Data'} icon={<UserCheckIcon className="w-5 -h-5 text-blue-500"/> } label={`(${area})`}>
+                                                <BigCard  title={'Checkin Data'} icon={<UserCheckIcon className={`${theme.baseText}`} />} label={`(${area})`}>
                                                       {isForecastChartLoading ?(
                                                             <Skeleton height="95%" width="100%" className="rounded-xl"/>
                                                       ): (
@@ -183,7 +185,7 @@ export default function Analytics(){
                                                 </BigCard>
 
                                                 {/* Revenue Forecast Chart*/}
-                                                <BigCard   title={'Revenue Data'} icon={<DollarSignIcon className="w-5 -h-5 text-blue-500"/> } label={`(${area})`}>
+                                                <BigCard   title={'Revenue Data'} icon={<DollarSignIcon className={`${theme.baseText}`} />} label={`(${area})`}>
                                                       {isForecastChartLoading ?(
                                                             <Skeleton height="95%" width="100%" className="rounded-xl"/>
                                                       ): (
@@ -214,7 +216,7 @@ export default function Analytics(){
                                                             {/* Revenue and Checkin Forecast Chart*/}
                                                             <div className="grid grid-cols-1 gap-5">
                                                                   {/* Checkin Forecast Chart*/}
-                                                                        <BigCard  title={'Checkin Data'} icon={<UserCheckIcon className="w-5 -h-5 text-blue-500"/> } label={`(${area})`}>
+                                                                        <BigCard  title={'Checkin Data'} icon={<UserCheckIcon className={`${theme.baseText}`} />} label={`(${area})`}>
                                                                               {isForecastChartLoading ?(
                                                                                     <Skeleton height="93%" width="100%" className="rounded-xl"/>
                                                                               ): (
@@ -224,7 +226,7 @@ export default function Analytics(){
                                                                               )}
                                                                         </BigCard>
 
-                                                                        <BigCard   title={'Revenue Data'} icon={<DollarSignIcon className="w-5 -h-5 text-blue-500"/> } label={`(${area})`}>
+                                                                        <BigCard   title={'Revenue Data'} icon={<DollarSignIcon className={`${theme.baseText}`} />} label={`(${area})`}>
                                                                               {isForecastChartLoading ?(
                                                                                     <Skeleton height="95%" width="100%" className="rounded-xl"/>
                                                                               ): (

@@ -21,6 +21,7 @@ import {
       housekeepingQueries,
       useCleaningHistory
 } from "../hooks/housekeepingQueries";
+import { useTheme } from '../context/ThemeContext';
 
 const months = [
       "January", "February", "March", "April",
@@ -29,6 +30,7 @@ const months = [
 ];
 
 export default function Housekeeping(){
+      const { theme } = useTheme();
       const { setButtons, setSelectedButton } = useGlobalContext();
       const [ tableState, setTableState ] = useState('Room Status');
       const today = new Date();
@@ -90,18 +92,18 @@ export default function Housekeeping(){
                   {/* Desktop And Mobile Overview */}	
                   {/* Summary Cards */}	
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <AboveIconMetricCard icon={<BubblesIcon className="text-blue-500 dark:text-white w-5 h-5 md:w-6 md:h-6"/>} title={'To Be Cleaned'} data={metricData?.need_clean} bgColor={'bg-blue-100 dark:bg-blue-500'}/>
-                        <AboveIconMetricCard icon={<Loader className="animate-spin text-yellow-500 dark:text-white w-5 h-5 md:w-6 md:h-6"/>} title={'Cleaning'} data={metricData?.on_clean} bgColor={'bg-yellow-100 dark:bg-yellow-500'}/>
-                        <AboveIconMetricCard icon={<CheckIcon className="text-green-500 dark:text-white w-5 h-5 md:w-6 md:h-6"/>} title={'Ready/Available'} data={metricData?.ready} bgColor={`bg-green-100 dark:bg-green-500`}/>
+                        <AboveIconMetricCard icon={<BubblesIcon className="text-white w-5 h-5 md:w-6 md:h-6"/>} title={'To Be Cleaned'} data={metricData?.need_clean} />
+                        <AboveIconMetricCard icon={<Loader className="animate-spin text-white w-5 h-5 md:w-6 md:h-6"/>} title={'Cleaning'} data={metricData?.on_clean} />
+                        <AboveIconMetricCard icon={<CheckIcon className="text-white w-5 h-5 md:w-6 md:h-6"/>} title={'Ready/Available'} data={metricData?.ready} />
                   </div>
                   
                   <div className="bg-white mt-6 dark:bg-stone-900 md:p-3 p-2 rounded-md shadow-lg border border-stone-200 dark:border-stone-700 relative">
                         <div className="flex justify-between items-center border-b border-stone-200 dark:border-stone-700 pb-2">
                               {/* Table Title */}	
                               {tableState === 'Room Status' ? 
-                                    <TableTitle icon={<AreaChartIcon className="md:w-6 md:h-6 w-5 h-5 text-blue-600"/>} title={'Resort Area`s Status'} showBorderBottom={false}/>
+                                    <TableTitle icon={<AreaChartIcon className={`md:w-6 md:h-6 w-5 h-5 ${theme.baseText}`}/>} title={'Resort Area`s Status'} showBorderBottom={false}/>
                               :  
-                                    <TableTitle icon={<PiBroomFill className="md:w-6 md:h-6 w-5 h-5 text-green-600"/>} title={'Cleaning History'} showBorderBottom={false}/>
+                                    <TableTitle icon={<PiBroomFill className={`md:w-6 md:h-6 w-5 h-5 ${theme.baseText}`}/>} title={'Cleaning History'} showBorderBottom={false}/>
                               }
 
                               {/* Cleaning History Data */}	

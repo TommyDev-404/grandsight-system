@@ -19,6 +19,7 @@ import {
       PieController, 
       Filler
 } from "chart.js";
+import { useTheme } from "../../context/ThemeContext";
 
 Chart.register(
       BarController, 
@@ -36,6 +37,7 @@ Chart.register(
 );
 
 export default function StatsCharts() {
+      const { theme } = useTheme();
       const { selectedButton } = useGlobalContext();
       const { currentMode } = useDarkMode();
       const isDark = currentMode === "dark";
@@ -60,46 +62,46 @@ export default function StatsCharts() {
 
       // ====== Initialize Charts ======
       useEffect(() => {
-      if (!chartsReady || !statsData || !occupancyCanvas.current || !heavyMonthCanvas.current || !bookedAreaCanvas.current) return;
+            if (!chartsReady || !statsData || !occupancyCanvas.current || !heavyMonthCanvas.current || !bookedAreaCanvas.current) return;
 
-      // Occupancy Forecast
-      occupancyRef.current?.destroy();
-      occupancyRef.current = createOccupancyForecastChart({
-            canvas: occupancyCanvas.current,
-            data: statsData.occupancy_forecast,
-            isDarkMode: isDark,
-      });
-
-      // Heavy Guest Month
-      heavyMonthRef.current?.destroy();
-      heavyMonthRef.current = createHeavyGuestMonthChart({
-            canvas: heavyMonthCanvas.current,
-            data: statsData.heavy_guest_month,
-            isDarkMode: isDark,
-      });
-
-      // Most Booked Area
-      bookedAreaRef.current?.destroy();
-      bookedAreaRef.current = createMostBookedAreaChart({
-            canvas: bookedAreaCanvas.current,
-            data: statsData.most_booked_area,
-            isDarkMode: isDark,
-      });
-
-      return () => {
+            // Occupancy Forecast
             occupancyRef.current?.destroy();
-            occupancyRef.current = null;
+            occupancyRef.current = createOccupancyForecastChart({
+                  canvas: occupancyCanvas.current,
+                  data: statsData.occupancy_forecast,
+                  isDarkMode: isDark,
+            });
+
+            // Heavy Guest Month
             heavyMonthRef.current?.destroy();
-            heavyMonthRef.current = null;
+            heavyMonthRef.current = createHeavyGuestMonthChart({
+                  canvas: heavyMonthCanvas.current,
+                  data: statsData.heavy_guest_month,
+                  isDarkMode: isDark,
+            });
+
+            // Most Booked Area
             bookedAreaRef.current?.destroy();
-            bookedAreaRef.current = null;
-      };
+            bookedAreaRef.current = createMostBookedAreaChart({
+                  canvas: bookedAreaCanvas.current,
+                  data: statsData.most_booked_area,
+                  isDarkMode: isDark,
+            });
+
+            return () => {
+                  occupancyRef.current?.destroy();
+                  occupancyRef.current = null;
+                  heavyMonthRef.current?.destroy();
+                  heavyMonthRef.current = null;
+                  bookedAreaRef.current?.destroy();
+                  bookedAreaRef.current = null;
+            };
       }, [chartsReady, statsData, isDark, selectedButton]);
 
       return (
             <>
                   {/* Occupancy Forecast Chart */}
-                  <BigCard title="Occupancy Forecast (%)" icon={<ArrowBigUpDashIcon className="w-5 h-5 text-blue-500" />} label="(All Resort Area)">
+                  <BigCard title="Occupancy Forecast (%)" icon={<ArrowBigUpDashIcon className={`w-5 h-5 ${theme.baseText}`} />} label="(All Resort Area)">
                         {isLoading ? (
                               <Skeleton height="95%" width="100%" className="rounded-xl" />
                         ) : (
@@ -111,7 +113,7 @@ export default function StatsCharts() {
 
                   <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mt-4">
                         {/* Heavy Guest Month */}
-                        <BigCard title="Heavy Guest Month" icon={<ArrowBigUpDashIcon className="w-5 h-5 text-blue-500" />} label="(Historical)" colSpan="md:col-span-4">
+                        <BigCard title="Heavy Guest Month" icon={<ArrowBigUpDashIcon className={`w-5 h-5 ${theme.baseText}`} />} label="(Historical)" colSpan="md:col-span-4">
                               {isLoading ? (
                                     <Skeleton height="95%" width="100%" className="rounded-xl" />
                               ) : (
@@ -122,7 +124,7 @@ export default function StatsCharts() {
                         </BigCard>
 
                         {/* Area Booking Data */}
-                        <BigCard title="Area Booking Data" icon={<Clock className="w-5 h-5 text-blue-500" />} label="(Historical)" colSpan="md:col-span-2">
+                        <BigCard title="Area Booking Data" icon={<Clock className={`w-5 h-5 ${theme.baseText}`} />} label="(Historical)" colSpan="md:col-span-2">
                               {isLoading ? (
                                     <Skeleton height="95%" width="100%" className="rounded-xl" />
                               ) : (

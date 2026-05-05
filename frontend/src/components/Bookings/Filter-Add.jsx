@@ -78,7 +78,7 @@ export default function FilterAndAddBooking({ year, month, day, setYear, setMont
 
                               {/* Wrapper for select + strikethrough */}
                               <div className="relative w-10 md:w-15">
-                                    <select disabled={disableDay} value={day ?? ''} onChange={(e) => setDay(Number(e.target.value))} className={`md:py-2.5 py-2 px-4 text-xs md:text-sm border ${disableDay ? 'border-red-200 text-stone-100' : 'border-stone-300 dark:bg-stone-800 bg-white dark:text-stone-100 text-stone-700'} rounded-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all h-auto w-full`}>
+                                    <select disabled={disableDay} value={day ?? ''} onChange={(e) => setDay(Number(e.target.value))} className={`md:py-2.5 py-2 px-4 text-xs md:text-sm border ${disableDay ? 'border-stone-200 text-stone-100' : 'border-stone-300 dark:bg-stone-800 bg-white dark:text-stone-100 text-stone-700'} rounded-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all h-auto w-full`}>
                                           {daysInMonth.map((d) => (
                                                 <option key={d} value={d}>{d}</option>
                                           ))}
@@ -87,7 +87,7 @@ export default function FilterAndAddBooking({ year, month, day, setYear, setMont
                                     {/* Strikethrough line */}
                                     {disableDay && (
                                           <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                                <div className="w-full h-0.5 bg-red-500"></div>
+                                                <div className="w-full h-0.5 bg-stone-500"></div>
                                           </span>
                                     )}
                               </div>
