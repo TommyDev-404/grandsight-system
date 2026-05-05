@@ -92,9 +92,9 @@ export default function Housekeeping(){
                   {/* Desktop And Mobile Overview */}	
                   {/* Summary Cards */}	
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <AboveIconMetricCard icon={<BubblesIcon className="text-white w-5 h-5 md:w-6 md:h-6"/>} title={'To Be Cleaned'} data={metricData?.need_clean} />
-                        <AboveIconMetricCard icon={<Loader className="animate-spin text-white w-5 h-5 md:w-6 md:h-6"/>} title={'Cleaning'} data={metricData?.on_clean} />
-                        <AboveIconMetricCard icon={<CheckIcon className="text-white w-5 h-5 md:w-6 md:h-6"/>} title={'Ready/Available'} data={metricData?.ready} />
+                        <AboveIconMetricCard icon={<BubblesIcon className="w-5 h-5 md:w-6 md:h-6"/>} title={'To Be Cleaned'} data={metricData?.need_clean} />
+                        <AboveIconMetricCard icon={<Loader className="animate-spin w-5 h-5 md:w-6 md:h-6"/>} title={'Cleaning'} data={metricData?.on_clean} />
+                        <AboveIconMetricCard icon={<CheckIcon className="w-5 h-5 md:w-6 md:h-6"/>} title={'Ready/Available'} data={metricData?.ready} />
                   </div>
                   
                   <div className="bg-white mt-6 dark:bg-stone-900 md:p-3 p-2 rounded-md shadow-lg border border-stone-200 dark:border-stone-700 relative">

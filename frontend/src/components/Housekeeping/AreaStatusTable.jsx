@@ -53,7 +53,7 @@ export default function AreaStatusTable(){
                                     </div>
                               </div>
 
-                              <Button icon={<Building2Icon className="w-4 h-4"/>} text={'View Rooms'} type={'button'} clickEvent={() => handleViewRoomModal(data.area_name)} className={'p-3'}/>
+                              <Button text={'View Rooms'} type={'button'} clickEvent={() => handleViewRoomModal(data.area_name)} className={'p-3'}/>
                         </li>
                   ))}
             </ul>

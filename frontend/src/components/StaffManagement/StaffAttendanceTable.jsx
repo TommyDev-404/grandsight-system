@@ -3,6 +3,7 @@ import { Clock, Loader2Icon, Trash2Icon } from "lucide-react"; // lucide icon fo
 import { useModal } from "../../context/ModalContext";
 import { useRemoveStaffAttendance, useStaffAttendanceRecord } from "../../hooks/staffMgmtQueries";
 import { useMessageCard } from "../../context/MessageCardContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const months = [
       "January", "February", "March", "April", "May", "June",
@@ -10,6 +11,7 @@ const months = [
 ];
 
 export default function StaffAttendanceTable() {
+      const { theme } = useTheme();
       const { openModal } = useModal();
       const { showMessage } = useMessageCard();
       const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
@@ -84,7 +86,7 @@ export default function StaffAttendanceTable() {
                                     <Clock className="w-4 h-4" /> Time Out
                               </button>
 
-                              <button onClick={() => handleOpenModal('add attendance')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg  text-xs md:text-sm">
+                              <button onClick={() => handleOpenModal('add attendance')} className={` ${theme.color} text-white px-4 py-2 rounded-lg  text-xs md:text-sm`}>
                                     + Add
                               </button>
                         </div>

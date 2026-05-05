@@ -24,23 +24,19 @@ const AreaAvlModal = lazy(() => import("./AreaAvlModal"));
 
 export const areaConfig = {
       Room: {
-            bg: "bg-blue-500",
-            icon: <Bed className="text-white w-5" />
+            icon: <Bed className="w-5" />
       },
 
       Cottage: {
-            bg: "bg-green-500",
-            icon: <Home className="text-white w-5" />
+            icon: <Home className="w-5" />
       },
 
       Hall: {
-            bg: "bg-rose-500",
-            icon: <Building2 className="text-white w-5" />
+            icon: <Building2 className="w-5" />
       },
 
       Other: {
-            bg: "bg-gray-400",
-            icon: <HelpCircle className="text-white w-5" />
+            icon: <HelpCircle className="w-5" />
       }
 };
 
@@ -168,7 +164,7 @@ export default function AddBookingModal({ closeModal }){
 
                                     <div className="grid md:grid-cols-4 gap-3 h-55 overflow-y-auto md:h-36 bg-stone-100 dark:bg-stone-700 border border-stone-200 dark:border-stone-700 p-2 rounded-sm  scrollbar-hide">
                                           {accommodationArea.map((acc) => (
-                                                <button type="button" disabled={formData.booking_type === 'Check-in' && ['Hall', 'Cottage'].includes(acc) ? true : false } onClick={() => handleOpenModal(acc.area)} key={acc.area} className={`flex flex-col items-center justify-center ${areaConfig[acc.category]?.bg} text-white text-sm py-2 rounded-lg cursor-pointer transition-all active:scale-95`}>
+                                                <button type="button" disabled={formData.booking_type === 'Check-in' && ['Hall', 'Cottage'].includes(acc) ? true : false } onClick={() => handleOpenModal(acc.area)} key={acc.area} className={`flex flex-col items-center justify-center ${theme.color} text-white text-sm py-2 rounded-lg cursor-pointer transition-all active:scale-95`}>
                                                       {areaConfig[acc.category].icon}
                                                       <p className="flex items-center gap-2 text-white">{acc.area}<span>({acc.count})</span></p>
                                                 </button>

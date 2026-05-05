@@ -45,7 +45,7 @@ export default function BookingTable({ year, month, day }){
       
       const { data: bookingData, isLoading: bookingDataLoading } = useBookingData({ category, currentPage, year, month, day, nameSearch });
       const recentData = bookingData?.data || [];
-      const totalData = bookingData?.total;
+      const totalData = bookingData?.total ?? 0;
       const totalPages = Math.ceil(totalData / 10 ); // store the total page
       const bookingTotalCount = bookingData?.count;
       
@@ -315,9 +315,11 @@ export default function BookingTable({ year, month, day }){
                                                                   </span>
                                                             </td>
                                                             <td className="p-3">
-                                                                  <button  onClick={() => handleOpenModal('view guest details', b)} className={`text-white text-sm bg-linear-to-r ${theme.base}  ${theme.hover} py-2 px-3 rounded-full flex items-center gap-1 transition-all active:scale-95`}>
-                                                                        <Eye size={16} />View
-                                                                  </button>
+                                                                  <div className="flex justify-center">
+                                                                        <button  onClick={() => handleOpenModal('view guest details', b)} className={`text-white text-sm bg-linear-to-r ${theme.base}  ${theme.hover} p-2 rounded-full flex items-center gap-1 transition-all active:scale-95`}>
+                                                                              <Eye size={20} />
+                                                                        </button>
+                                                                  </div>
                                                             </td>
                                                       </tr>
                                                 ))

@@ -144,7 +144,6 @@ function SidebarItem({ handleMobileSidebar, iconFill, iconOutline, label, path, 
       const { handleSetHeader } = usePageHeader();
       const { data: notificationData } = useNotification();
       const notifData = notificationData?.data || [];
-      console.log(theme.base);
       
       const handleMobileClick = () => {
             handleSetHeader(label);

@@ -82,7 +82,7 @@ export default function AnalyticsMetricCards({ area }) {
                   <div className="grid md:grid-cols-4 grid-1 gap-3">
                         <MetricCard
                               title="Daily Occupancy"
-                              icon={ <Building2Icon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
+                              icon={ <Building2Icon className="w-3 h-3 md:w-4 md:h-4" />}
                               current={formatPercent(metricData?.occupancy?.current)}
                               change={metricData?.occupancy?.change}
                               compareText="vs Yesterday"
@@ -91,7 +91,7 @@ export default function AnalyticsMetricCards({ area }) {
 
                         <MetricCard
                               title="Today`s Revenue"
-                              icon={<CalendarArrowUpIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
+                              icon={<CalendarArrowUpIcon className="w-3 h-3 md:w-4 md:h-4" />}
                               current={formatCurrency(metricData?.daily_revenue?.current)}
                               change={metricData?.daily_revenue?.change}
                               compareText="vs Yesterday"
@@ -100,7 +100,7 @@ export default function AnalyticsMetricCards({ area }) {
 
                         <MetricCard
                               title="Monthly Revenue"
-                              icon={<CalendarCogIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
+                              icon={<CalendarCogIcon className="w-3 h-3 md:w-4 md:h-4" />}
                               current={formatCurrency(metricData?.monthly_revenue?.current)}
                               change={metricData?.monthly_revenue?.change}
                               compareText="vs Target"
@@ -109,7 +109,7 @@ export default function AnalyticsMetricCards({ area }) {
 
                         <Card
                               title="Target Revenue"
-                              icon={<TargetIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />}
+                              icon={<TargetIcon className="w-3 h-3 md:w-4 md:h-4" />}
                               iconBg="bg-red-100 dark:bg-red-500"
                         >
                               <p className="text-2xl  md:text-3xl font-bold text-gray-800 dark:text-white mb-5">

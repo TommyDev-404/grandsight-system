@@ -70,22 +70,30 @@ export default function RoomDetailsTable(){
                                     </div>
                                     <div>
                                           <span className="block text-xs text-gray-500 dark:text-gray-400">Available</span>
-                                          <span className="block font-bold text-lg text-blue-500">{data.available}</span>
+                                          <span className="block font-bold text-lg text-gray-800 dark:text-gray-200">{data.available}</span>
                                     </div>
                                     <div>
                                           <span className="block text-xs text-gray-500 dark:text-gray-400">Occupied</span>
-                                          <span className="block font-bold text-lg text-red-500">{data.occupied}</span>
+                                          <span className="block font-bold text-lg text-gray-800 dark:text-gray-200">{data.occupied}</span>
                                     </div>
                                     <div>
                                           <span className="block text-xs text-gray-500 dark:text-gray-400">Reserved</span>
-                                          <span className="block font-bold text-lg text-green-500">{data.reserve}</span>
+                                          <span className="block font-bold text-lg text-gray-800 dark:text-gray-200">{data.reserve}</span>
                                     </div>
                               </div>
                               
-                              <div className="flex flex-col gap-2">
-                                    <Button icon={<LayoutDashboardIcon className="w-4 h-4"/>} text={'Edit Area Details'} type={'button'} clickEvent={() => handleOpenModal('edit area', data)} className={'p-2.5 md:p-3 text-xs md:text-sm'}/>
-                                    <button onClick={() => handleConfirmRemove(data.area_name)} className="bg-red-500 hover:bg-red-600 text-white p-1.5 md:p-2.5 text-xs md:text-sm rounded-md flex items-center justify-center gap-2" >
-                                          <Trash2Icon className="w-4"/>
+                              <div className="flex gap-2 w-full">
+                                    <Button
+                                          text="Edit Details"
+                                          type="button"
+                                          clickEvent={() => handleOpenModal("edit area", data)}
+                                          className="flex-1 p-2.5 md:p-3 text-xs md:text-sm"
+                                    />
+
+                                    <button
+                                          onClick={() => handleConfirmRemove(data.area_name)}
+                                          className="flex-1 border border-red-300 text-red-500 p-2.5 md:p-3 text-xs md:text-sm rounded-md flex items-center justify-center gap-2"
+                                    >
                                           Remove Area
                                     </button>
                               </div>

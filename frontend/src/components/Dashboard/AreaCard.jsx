@@ -1,5 +1,7 @@
+import { useTheme } from "../../context/ThemeContext";
 
-export default function AreaCard({ roomName, icon, iconBgColor, occupied, reserved, needClean, available, total }) {
+export default function AreaCard({ roomName, icon, occupied, reserved, needClean, available, total }) {
+      const { theme } = useTheme();
       const percentage = Number(total) > 0 ? (Number(available) / Number(total)) * 100 : 0;
       
       return (
@@ -7,7 +9,7 @@ export default function AreaCard({ roomName, icon, iconBgColor, occupied, reserv
                   {/* Header */}
                   <div className="flex items-center justify-between mb-5">
                         <h2 className="text-sm md:text-base font-semibold text-stone-800 dark:text-stone-100">{roomName}</h2>
-                        <div className={`${iconBgColor} p-2 rounded-lg text-white`}>{icon}</div>
+                        <div className={`${theme.baseText}`}>{icon}</div>
                   </div>
       
                   {/* Stats */}

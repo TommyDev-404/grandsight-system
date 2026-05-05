@@ -22,18 +22,18 @@ export default function RoomOverview(){
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-3">
                         <Suspense fallback={null}>
-                              <SideIconCards title={'Total Area'} icon={<Grid2X2Check className="w-5 h-5 text-white"/>} bgColor={`${theme.color}`} data={areaMetric?.total_area}/>
-                              <SideIconCards title={'Available'} icon={<CheckCheck className="w-5 h-5 text-white"/>} bgColor={`${theme.color}`} data={areaMetric?.available}/>
-                              <SideIconCards title={'Total Occupied'} icon={<BedDouble className="w-5 h-5 text-white"/>} bgColor={`${theme.color}`} data={areaMetric?.occupied}/>
-                              <SideIconCards title={'To be Cleaned'} icon={<SprayCanIcon className="w-5 h-5 text-white"/>} bgColor={`${theme.color}`} data={areaMetric?.today_need_clean}/>
-                              <SideIconCards title={'Reserved Area'} icon={<BookMarkedIcon className="w-5 h-5 text-white"/>} bgColor={`${theme.color}`} data={areaMetric?.reserve}/>
+                              <SideIconCards title={'Total Area'} icon={<Grid2X2Check className="w-5 h-5 "/>}  data={areaMetric?.total_area}/>
+                              <SideIconCards title={'Available'} icon={<CheckCheck className="w-5 h-5"/>} data={areaMetric?.available}/>
+                              <SideIconCards title={'Total Occupied'} icon={<BedDouble className="w-5 h-5"/>} data={areaMetric?.occupied}/>
+                              <SideIconCards title={'To be Cleaned'} icon={<SprayCanIcon className="w-5 h-5"/>} data={areaMetric?.today_need_clean}/>
+                              <SideIconCards title={'Reserved Area'} icon={<BookMarkedIcon className="w-5 h-5"/>} data={areaMetric?.reserve}/>
                         </Suspense>
                   </div>
 
-                  <div className="grid md:grid-cols-4 gap-4 overflow-y-auto  h-[65vh] md:h-[60vh] scrollbar-hide">
+                  <div className="grid md:grid-cols-4 gap-4 overflow-y-auto h-[65vh] md:h-[60vh] scrollbar-hide">
                         <Suspense fallback={null}>
                               { areaDetails.map(data => (
-                                    <AreaCard key={data.area_name} roomName={data.area_name} icon={areaConfig[data.category.trim()].icon} iconBgColor={areaConfig[data.category.trim()].bg} occupied={data.occupied} reserved={data.reserve} needClean={data.need_clean} available={data.available} total={data.total_rooms}/>
+                                    <AreaCard key={data.area_name} roomName={data.area_name} icon={areaConfig[data.category.trim()].icon} occupied={data.occupied} reserved={data.reserve} needClean={data.need_clean} available={data.available} total={data.total_rooms}/>
                               ))}
                         </Suspense>
                   </div>

@@ -17,7 +17,7 @@ export default function CardSideButton({ title, icon, colSpan, children,  modalT
             <div className={`${colSpan} p-4 md:p-5  bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg shadow-md hover:shadow-lg transition-transform duration-200 transform hover:scale-103 flex flex-col justify-between`} >
                   <div className="flex justify-between items-center">
                         <p className="text-xs md:text-[16px]  font-semibold text-gray-600 dark:text-gray-300 flex justify-between items-center gap-2 ">
-                              <span className={`${theme.color} p-2 rounded-full`}>{icon}</span>
+                              <span className={`${theme.baseText}`}>{icon}</span>
                               {title}
                         </p>
                         <button onClick={handleModalOpen} className="relative text-[12px] md:text-xs bg-stone-200 font-medium rounded-sm py-1.5 px-2  md:py-2 md:px-3 dark:text-white dark:bg-stone-700 transition-all active:scale-95">

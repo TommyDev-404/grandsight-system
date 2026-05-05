@@ -13,7 +13,7 @@ export default function BookingMetricCards(){
       return (
             <SkeletonTheme baseColor={currentMode === 'dark' ? "#374151" : "#e5e7eb"} highlightColor={currentMode === 'dark' ? "#4b5563" : "#ffffff"} duration={1}>
                   <div className="grid md:grid-cols-13 gap-4">
-                        <CardSideIcon title={'Today`s Check-in'} icon={<UserCheckIcon className="w-4 h-4 text-white"/>}colSpan={'md:col-span-2'}>
+                        <CardSideIcon title={'Today`s Check-in'} icon={<UserCheckIcon className="w-4 h-4"/>}colSpan={'md:col-span-2'}>
                               <div className="flex justify-around ">
                                     <div className="flex flex-col items-center">
                                           <span className="text-2xl font-bold text-gray-800 dark:text-white">{summaryCardData?.today_checkin ?? "--"}</span>
@@ -27,7 +27,7 @@ export default function BookingMetricCards(){
                               </div>
                         </CardSideIcon>
 
-                        <CardSideIcon title={'Today`s Booking Overview'} icon={<BookCheckIcon className="w-4 h-4  text-white"/>} colSpan={'md:col-span-3'}>
+                        <CardSideIcon title={'Today`s Booking Overview'} icon={<BookCheckIcon className="w-4 h-4 "/>} colSpan={'md:col-span-3'}>
                               <div className="flex justify-around text-center gap-4">
                                     <div>
                                           <span className="text-gray-600 dark:text-gray-200 text-sm">Overnight</span>
@@ -43,7 +43,7 @@ export default function BookingMetricCards(){
                               </div>
                         </CardSideIcon>
                         
-                        <CardSideButton title={'Today`s Check-Out'} count={summaryCardData?.checkouts} modalTitle={'Upcoming Checkouts'} modalIcon={<LogOut className="w-5 h-5"/>}  icon={<LogOut className="w-4 h-4  text-white"/>} colSpan={'md:col-span-4'}>
+                        <CardSideButton title={'Today`s Check-Out'} count={summaryCardData?.checkouts} modalTitle={'Upcoming Checkouts'} modalIcon={<LogOut className="w-5 h-5"/>}  icon={<LogOut className="w-4 h-4"/>} colSpan={'md:col-span-4'}>
                               <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300 mt-3">
                                     <div className="flex justify-between items-center">
                                     <span className="text-sm">Day Guest</span>
@@ -61,7 +61,7 @@ export default function BookingMetricCards(){
                               </div>
                         </CardSideButton>
 
-                        <CardSideButton title={'Reservation`s Info'} count={summaryCardData?.arrivals} modalTitle={'Upcoming Arrivals'} modalIcon={<LogInIcon className="w-5 h-5 text-white"/>}  icon={<BookMarkedIcon className="w-4 h-4 text-white"/>} colSpan={'md:col-span-4'}>
+                        <CardSideButton title={'Reservation`s Info'} count={summaryCardData?.arrivals} modalTitle={'Upcoming Arrivals'} modalIcon={<LogInIcon className="w-5 h-5 text-white"/>}  icon={<BookMarkedIcon className="w-4 h-4"/>} colSpan={'md:col-span-4'}>
                               <div className="flex justify-around text-center gap-8">
                                     <div>
                                           <span className="text-gray-600 dark:text-gray-200 text-sm">All Reservation</span>

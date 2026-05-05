@@ -12,8 +12,8 @@ export default function ThemeProvider({ children }){
                   hover: "hover:from-blue-700 hover:to-purple-700",
                   disable: "from-blue-800 to-purple-800",
                   baseText: "text-purple-500",
-                  ring: "ring-2 ring-gradient-to-r",
                   name: 'bluePurple', 
+                  bgHover: 'hover:bg-purple-50',
                   color: "bg-purple-500",
             },
             greenTeal: {
@@ -21,6 +21,7 @@ export default function ThemeProvider({ children }){
                   disable: "from-green-800 to-teal-800",
                   baseText: "text-green-500",
                   hover: "hover:from-green-700 hover:to-teal-700",
+                  bgHover: 'hover:bg-green-50',
                   name: 'greenTeal',
                   color: "bg-green-500",
             },
@@ -29,6 +30,7 @@ export default function ThemeProvider({ children }){
                   disable: "from-purple-800 to-pink-800",
                   baseText: "text-pink-500",
                   hover: "hover:from-purple-700 hover:to-pink-700",
+                  bgHover: 'hover:bg-pink-50',
                   name: 'purplePink',
                   color: "bg-pink-500",
             }
