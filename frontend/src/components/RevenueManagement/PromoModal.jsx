@@ -84,7 +84,7 @@ export default function PromoModal({ setEditModal, isEditModal, customClassName=
                   payload.id = data.id;
                   payload.prev_area = data.area;
             }
-            console.log(payload);
+            
             isEditModal ? updatePromo(payload) : addPromo(payload);
       };
 

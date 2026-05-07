@@ -13,11 +13,18 @@ class RevenueMgmt:
 
                         promo_start = datetime.strptime(start, "%Y-%m-%d").date()
                         promo_end = datetime.strptime(end, "%Y-%m-%d").date()
+
                         discount = float(promo_rate) / 100
                         areas = [a.strip() for a in areas_promo.split(',')]
                         promo_label = f"{promo_name} - {promo_rate}%"
-
                         status = 'Expired' if promo_end <= date.today() else 'Active'
+
+                        # Validate promo dates
+                        if promo_end < date.today():
+                              return {
+                                    'success': False,
+                                    'message': 'Cannot apply an expired promotion.'
+                              }
 
                         # 1️⃣ Insert promo
                         cursor.execute('''

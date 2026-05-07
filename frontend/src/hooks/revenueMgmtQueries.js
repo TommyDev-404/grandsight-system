@@ -109,10 +109,10 @@ function useAppMutation(factoryFn, { showMessage, resetForm } = {}) {
                   resetForm?.();
             },
 
-            onError: () => {
+            onError: (res) => {
                   showMessage?.({
                         status: "failed",
-                        message: "Something went wrong!",
+                        message: res.message || "Something went wrong!",
                   });
             },
       });
