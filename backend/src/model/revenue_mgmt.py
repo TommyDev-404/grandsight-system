@@ -17,7 +17,7 @@ class RevenueMgmt:
                         areas = [a.strip() for a in areas_promo.split(',')]
                         promo_label = f"{promo_name} - {promo_rate}%"
 
-                        status = 'Expired' if promo_end < date.today() else 'Active'
+                        status = 'Expired' if promo_end <= date.today() else 'Active'
 
                         # 1️⃣ Insert promo
                         cursor.execute('''
@@ -77,7 +77,7 @@ class RevenueMgmt:
 
                         return {
                               'success': True,
-                              'message': 'Promotion applied successfully'
+                              'message': 'Promotion added successfully'
                         }
 
             except Exception as e:

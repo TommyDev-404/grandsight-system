@@ -19,4 +19,5 @@ ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Run the Flask app
-CMD ["python", "app.py"]
+#CMD ["python", "app.py"] - production
+CMD ["flask", "run", "--host=0.0.0.0", "--debug"]
