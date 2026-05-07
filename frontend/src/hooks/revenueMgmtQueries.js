@@ -88,7 +88,14 @@ function useAppMutation(factoryFn, { showMessage, resetForm } = {}) {
             mutationFn: config.mutationFn,
 
             onSuccess: async (res) => {
-                  if (!res?.success) return;
+                  if (!res?.success){
+                        showMessage?.({
+                              status: "failed",
+                              message: res.message || "Something went wrong!",
+                        });
+                        resetForm?.();
+                        return;
+                  };
 
                   if (config.invalidateQueries?.length) {
                         await Promise.all(
@@ -109,7 +116,7 @@ function useAppMutation(factoryFn, { showMessage, resetForm } = {}) {
                   resetForm?.();
             },
 
-            onError: (res) => {
+            onError: async (res) => {
                   showMessage?.({
                         status: "failed",
                         message: res.message || "Something went wrong!",

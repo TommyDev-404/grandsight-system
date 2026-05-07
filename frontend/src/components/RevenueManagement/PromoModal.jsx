@@ -14,6 +14,7 @@ export default function PromoModal({ setEditModal, isEditModal, customClassName=
             start: '',
             end: ''
       };
+      const CURRENT_YEAR = new Date().getFullYear();
       
       const { closeModal, modal } = useModal();
       const { showMessage } = useMessageCard();
@@ -75,16 +76,50 @@ export default function PromoModal({ setEditModal, isEditModal, customClassName=
             setSelectedAreas(selectedAreas.length === areas.length ? [] : areas.map(area => area.area_name));
       };
 
+      const validateForm = () => {
+            const { start, end, promo_rate } = formData;
+      
+            if (!start || !end) {
+                  showMessage("Start and End date are required", "error");
+                  return false;
+            }
+      
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+      
+            // Rule 1 & 2: date order
+            if (endDate < startDate) {
+                  showMessage("End date cannot be earlier than start date", "error");
+                  return false;
+            }
+      
+            // Rule 3: must be current year only
+            if (startDate.getFullYear() !== CURRENT_YEAR || endDate.getFullYear() !== CURRENT_YEAR) {
+                  showMessage("Promo must be within the current year only", "error");
+                  return false;
+            }
+      
+            // Optional: discount sanity check
+            if (promo_rate <= 0 || promo_rate > 100) {
+                  showMessage("Discount must be between 1 and 100", "error");
+                  return false;
+            }
+      
+            return true;
+      };
+
       const handleSubmit = async (e) => {
             e.preventDefault();
-            
+                  
+            if (!validateForm()) return;
+
             const payload = { ...formData, areas_promo: selectedAreas.join(',') };
             
             if (isEditModal) {
                   payload.id = data.id;
                   payload.prev_area = data.area;
             }
-            
+
             isEditModal ? updatePromo(payload) : addPromo(payload);
       };
 
@@ -112,12 +147,28 @@ export default function PromoModal({ setEditModal, isEditModal, customClassName=
 
                                     <div>
                                           <label className="block text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">Start Date</label>
-                                          <input type="date" value={formData.start} onChange={(e) => setFormData({ ...formData, start: e.target.value })} required className="text-sm md:text-base mt-2 w-full rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-white p-3 focus:ring-blue-500 focus:border-blue-500 transition"/>
+                                          <input
+                                                type="date"
+                                                value={formData.start}
+                                                min={`${CURRENT_YEAR}-01-01`}
+                                                max={`${CURRENT_YEAR}-12-31`}
+                                                onChange={(e) => setFormData({ ...formData, start: e.target.value })}
+                                                required
+                                                className="text-sm md:text-base mt-2 w-full rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-white p-3 focus:ring-blue-500 focus:border-blue-500 transition"
+                                          />
                                     </div>
 
                                     <div>
                                           <label className="block text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">End Date</label>
-                                          <input type="date" value={formData.end} onChange={(e) => setFormData({ ...formData, end: e.target.value })} required className="text-sm md:text-base mt-2 w-full rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-white p-3 focus:ring-blue-500 focus:border-blue-500 transition"/>
+                                          <input
+                                                type="date"
+                                                value={formData.end}
+                                                min={formData.start || `${CURRENT_YEAR}-01-01`}
+                                                max={`${CURRENT_YEAR}-12-31`}
+                                                onChange={(e) => setFormData({ ...formData, end: e.target.value })}
+                                                required
+                                                className="text-sm md:text-base mt-2 w-full rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-white p-3 focus:ring-blue-500 focus:border-blue-500 transition"
+                                          />
                                     </div>
                               </div>
 

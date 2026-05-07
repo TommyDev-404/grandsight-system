@@ -18,6 +18,7 @@ jwt = JWTManager(app)
 CORS(  app, origins=["http://localhost:5173"], supports_credentials=True)
 
 # Create DB object once here
+'''
 db = Database( 
       host="db", 
       user="root", 
@@ -25,6 +26,16 @@ db = Database(
       database="resort_db", 
       port=3306, 
       cursor=pymysql.cursors.DictCursor 
+)
+'''
+
+db = Database(
+      host="127.0.0.1",
+      user="root",
+      password="root",
+      database="resort_db",
+      port=3307,
+      cursor=pymysql.cursors.DictCursor
 )
 
 # create instances of classes

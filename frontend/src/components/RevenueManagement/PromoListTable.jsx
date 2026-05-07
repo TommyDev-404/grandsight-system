@@ -41,9 +41,6 @@ export default function PromoList({ setToEditModal, viewType}) {
                   }
             });
       };
-
-      const today = new Date();
-      const isExpired = new Date(promo.end_date) < today;
       
       return (
             <ul className="space-y-4 px-1 md:px-4">
@@ -56,18 +53,19 @@ export default function PromoList({ setToEditModal, viewType}) {
                                                 <span className="font-semibold text-sm md:text-lg text-gray-900 dark:text-gray-100">
                                                       {promo.name}
                                                 </span>
-
-                                                {/* Status Badge */}
-                                                <span
-                                                      className={`text-[10px] md:text-xs px-2 py-1 rounded-full font-medium
-                                                      ${
-                                                            isExpired
-                                                                  ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'
-                                                                  : 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400'
-                                                      }`}
-                                                >
-                                                      {isExpired ? 'Expired' : 'Active'}
-                                                </span>
+                                                      {/* Status Badge */}
+                                                      <span
+                                                            className={`text-[10px] md:text-xs px-2 py-1 rounded-full font-medium
+                                                            ${
+                                                                  promo.status === 'Expired'
+                                                                        ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'
+                                                                        : promo.status === 'Upcoming'
+                                                                        ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'
+                                                                        : 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400'
+                                                            }`}
+                                                      >
+                                                            {promo.status}
+                                                      </span>
                                           </div>
 
                                           <div className="text-[12px] md:text-sm text-gray-500 dark:text-gray-400">

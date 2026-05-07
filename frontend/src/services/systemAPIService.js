@@ -234,7 +234,6 @@ export const revenueMgmtAddPromoAPI = async(promoData) => {
 };
 
 export const revenueMgmtUpdatePromoAPI = async(promoData) => {
-      console.log(promoData)
       const response = await apiClient.post('api/revenue/update-promo', promoData);
       return response.data;
 };

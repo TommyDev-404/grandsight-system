@@ -17,13 +17,46 @@ class RevenueMgmt:
                         discount = float(promo_rate) / 100
                         areas = [a.strip() for a in areas_promo.split(',')]
                         promo_label = f"{promo_name} - {promo_rate}%"
-                        status = 'Expired' if promo_end <= date.today() else 'Active'
+
+                        # status check
+                        today = date.today()
+                        if promo_start > today:
+                              status = "Upcoming"
+                        elif promo_end <= today:
+                              status = "Expired"
+                        else:
+                              status = "Active"
 
                         # Validate promo dates
-                        if promo_end < date.today():
+                        if promo_end <= date.today():
                               return {
                                     'success': False,
-                                    'message': 'Cannot apply an expired promotion.'
+                                    'message': 'Cannot add an expired promotion.'
+                              }
+                        
+                        # validate if there is an active promo in the same area
+                        cursor.execute(f'''
+                              SELECT name FROM promos 
+                              WHERE status = 'Active'
+                              AND area IN ({','.join(['%s'] * len(areas))})
+                        ''', areas)
+                        active_promo = cursor.fetchone()
+                        if active_promo and promo_start <= date.today():
+                              return {
+                                    'success': False,
+                                    'message': f'There is an active promotion in the area you selected.'
+                              }
+
+                        # validate promo name to prevent duplication
+                        cursor.execute('''
+                              SELECT name FROM promos WHERE name = %s
+                        ''', (promo_label,))
+                        existing_promo = cursor.fetchone()
+
+                        if existing_promo:
+                              return {
+                                    'success': False,
+                                    'message': 'Promotion already exists.'
                               }
 
                         # 1️⃣ Insert promo
@@ -33,13 +66,14 @@ class RevenueMgmt:
                         ''', (start, promo_label, promo_rate, ",".join(areas), end, status))
 
                         if promo_end > date.today():
-                              # Apply promo
-                              cursor.execute(f'''
-                                    UPDATE accomodation_spaces
-                                    SET promo = %s,
-                                    rate = orig_rate * (1 - %s)
-                                    WHERE area_name IN ({','.join(['%s'] * len(areas))})
-                              ''', [promo_label, discount, *areas])
+                              if promo_start <= date.today():
+                                    # Apply promo
+                                    cursor.execute(f'''
+                                          UPDATE accomodation_spaces
+                                          SET promo = %s,
+                                          rate = orig_rate * (1 - %s)
+                                          WHERE area_name IN ({','.join(['%s'] * len(areas))})
+                                    ''', [promo_label, discount, *areas])
                         else:
                               # reset price to orig rate
                               cursor.execute(f'''
@@ -110,19 +144,35 @@ class RevenueMgmt:
                               cursor.execute(''' UPDATE accomodation_spaces SET promo = %s, rate = orig_rate WHERE area_name = %s ''', ("None", area))
                               con.commit()
 
-                        status = 'Active'  if promo_end >= date.today() else  'Expired'
+                        # status check
+                        today = date.today()
+                        if promo_start > today:
+                              status = "Upcoming"
+                        elif promo_end <= today:
+                              status = "Expired"
+                        else:
+                              status = "Active"
 
                         # 1️⃣ Update promo
                         cursor.execute(''' UPDATE promos SET start_date = %s, name = %s, discount = %s, area = %s, end_date = %s, status = %s WHERE id = %s''', (start, promo_label, promo_rate, ",".join(areas), end, status, id))
                         promo_updated = cursor.rowcount > 0
 
                         # 2️⃣ Update accommodation prices (FROM BASE RATE)
-                        cursor.execute(f'''
+                        if status == 'Active' :
+                              rate_expr = "orig_rate * (1 - %s)"
+                              params = [promo_label, discount]
+                        else:
+                              rate_expr = "orig_rate"
+                              params = ["None"]
+
+                        query = f"""
                               UPDATE accomodation_spaces
                               SET promo = %s,
-                              rate = orig_rate * (1 - %s)
+                                    rate = {rate_expr}
                               WHERE area_name IN ({','.join(['%s'] * len(areas))})
-                        ''', [promo_label, discount, *areas])
+                        """
+
+                        cursor.execute(query, params + areas)
                         con.commit()
 
                         # 3️⃣ Find affected bookings
